@@ -40,4 +40,15 @@ app.post('/todos/create', async (req, res) => {
   return res.json(todo);
 });
 
+app.delete('/todos/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  const todo = await prisma.todo.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+  return res.json(todo);
+});
+
 app.listen(port, () => console.log(`Server Listen on Port ${port}`));
